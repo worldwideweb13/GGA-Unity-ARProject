@@ -9,4 +9,5 @@ public class TitleManager : MonoBehaviour
     {
         SoundManager.instance.PlaySE();
     }
+    
 }
