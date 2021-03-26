@@ -48,22 +48,6 @@ public class StartIconController : MonoBehaviour {
     Color GetAlphaColor(Color color) {
         time += Time.deltaTime * 5.0f * speed;
         color.a = Mathf.Sin(time) * 0.5f + 0.5f;
-
         return color;
     }
-
-  //=================================================================================
-  //スタートボタンを押下した時の処理
-  //=================================================================================
-
-  [SerializeField]
-  GameObject TopMenu;
-
-  public void SetMenu() {
-      TopMenu.SetActive(true);
-      image.enabled = false;
-  }
-
-  
-
 }

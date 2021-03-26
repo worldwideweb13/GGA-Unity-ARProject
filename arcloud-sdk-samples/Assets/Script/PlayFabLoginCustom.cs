@@ -90,7 +90,7 @@ public class PlayFabLoginCustom : MonoBehaviour
     // }
     
     // JSON形式でのタイトルデータの更新／取得処理
-    void GetTitleData()
+    public void GetTitleData()
     {
         PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(),
             result =>
