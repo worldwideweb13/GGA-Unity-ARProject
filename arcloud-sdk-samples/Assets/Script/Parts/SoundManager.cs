@@ -61,6 +61,14 @@ public class SoundManager : MonoBehaviour
                 audioSourceBGM.clip = audioClipsBGM[7];
                  audioSourceBGM.volume = 1;               
                 break;
+            case "Collections":
+                audioSourceBGM.clip = audioClipsBGM[7];
+                 audioSourceBGM.volume = 1;
+                 break; 
+            case "CollectionData":
+                audioSourceBGM.clip = audioClipsBGM[7];
+                 audioSourceBGM.volume = 1;
+                 break;                       
         }
         audioSourceBGM.Play();
     }
