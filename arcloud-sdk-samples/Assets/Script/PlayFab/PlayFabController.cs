@@ -161,12 +161,6 @@ public class PlayFabController : MonoBehaviour {
                       CharaDataList.Add(CharaData);
                     }
                 }
-                Debug.Log(CharaDataList[0]["ID"]);
-                Debug.Log(CharaDataList[1]["ID"]);
-                Debug.Log(CharaDataList[2]["ID"]);
-                Debug.Log(CharaDataList[3]["ID"]);
-                Debug.Log(CharaDataList[4]["ID"]);
-                Debug.Log(CharaDataList[5]["ID"]);
             },
             error =>
             {

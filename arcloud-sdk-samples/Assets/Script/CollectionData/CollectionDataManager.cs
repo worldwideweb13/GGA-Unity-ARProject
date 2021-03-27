@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;   
 
 public class CollectionDataManager : MonoBehaviour
 {
@@ -23,10 +24,18 @@ public class CollectionDataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var CollectionData = ARSelectManager.SelectedText;
-        // int num = PlayFabController.CharaDataList.IndexOf(CollectionData);
-        // NameText.GetComponent<Text>().text = PlayFabController.CharaDataList[]["Name"];
-
+        var CollectionData = CollectionsManager.SelectedListID;
+        Debug.Log(CollectionData);
+        NameText.GetComponent<Text>().text = PlayFabController.CharaDataList[CollectionData]["Name"];        
+        NoText.GetComponent<Text>().text = PlayFabController.CharaDataList[CollectionData]["ID"];        
+        PanelText.GetComponent<Text>().text = PlayFabController.CharaDataList[CollectionData]["PanelText"];        
+        PersonImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Person/" + PlayFabController.CharaDataList[CollectionData]["ImgTitle"]);
+        TimeAnswer.GetComponent<Text>().text = PlayFabController.CharaDataList[CollectionData]["Time"];        
+        CateforyAnswer.GetComponent<Text>().text = PlayFabController.CharaDataList[CollectionData]["Category"];        
+        TextAnswer.GetComponent<Text>().text = PlayFabController.CharaDataList[CollectionData]["KeyWord"];
+        // Debug.Log(PlayFabController.CharaDataList[CollectionData]["AvatorName"]);
+        GameObject Character = (GameObject)Resources.Load("PreFab/" + PlayFabController.CharaDataList[CollectionData]["AvatorName"]);
+        GameObject instance = (GameObject)Instantiate(Character);
     }
 
     // Update is called once per frame

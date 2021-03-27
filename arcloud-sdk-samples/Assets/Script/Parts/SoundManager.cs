@@ -53,6 +53,7 @@ public class SoundManager : MonoBehaviour
                 break;
             case "AsakuraAR":
                 audioSourceBGM.clip = audioClipsBGM[5];
+                audioSourceBGM.volume = 0.15f;
                 break;
             case "MakinoAR":
                 audioSourceBGM.clip = audioClipsBGM[6];

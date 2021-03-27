@@ -9,6 +9,8 @@ public class SceneTransitionManager : MonoBehaviour
     {
         SoundManager.instance.PlayBGM(SceneName);
         SceneManager.LoadScene(SceneName);
+        Debug.Log(SceneName);
+
     }
 
 }

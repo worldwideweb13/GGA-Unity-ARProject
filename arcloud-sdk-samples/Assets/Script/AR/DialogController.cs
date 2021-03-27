@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class ImgEffectController : MonoBehaviour
+public class DialogController : MonoBehaviour
 {
     // メッセージキャンパス
     public GameObject DialogUICcanvas;
