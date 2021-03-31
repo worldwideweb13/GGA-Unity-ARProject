@@ -11,9 +11,14 @@ public class StaticMapController : MonoBehaviour
     // 緯度（経度）1度の距離(m)
     private const float Lat2Meter = 111319.491f;
 
+    // 現在地表示のピン
+    private string LocationIcon = "icon:https://user-images.githubusercontent.com/75665390/113117053-10f9b400-9249-11eb-90a7-8e0ac234a728.png";
+
+    private string GsAcademy = "35.6693318,139.7008082";
     // 画像のzoomサイズ
-    [SerializeField]
-    private int zoom = 18;
+    public int zoom = 17;
+    // ズーム率調整用のため、前回のズーム値を保持しておく
+    private int PreZoom = 17;
 
     // マップ更新の閾値
     private const float ThresholdDistance = 5f;
@@ -28,14 +33,17 @@ public class StaticMapController : MonoBehaviour
     private const int MapSpriteSize = 828;
 
     [SerializeField] GameObject loading; //ダウンロード確認用オブジェクト
-    [SerializeField] Text txtLocation; //座標
-    [SerializeField] Text txtDistance; //距離
+    // [SerializeField] Text txtLocation; //座標
+    // [SerializeField] Text txtDistance; //距離
     [SerializeField] Image mapImage; //マップ Image 
 
 
     // 起動処理
     void Start()
     {
+        // ローディング表示を非表示にしておく
+        loading.SetActive(false);
+
         // GPS初期化 Input.LocationにてLocationServiceを呼び出すことが出来る
         // LocationService = 携帯端末が保持する位置情報を取得するためのクラス
         Input.location.Start();
@@ -44,6 +52,21 @@ public class StaticMapController : MonoBehaviour
         // マップ取得
         StartCoroutine(updateMap());
         
+    }
+
+    // ズームボタン押下時に呼び出されるメソッド
+    public void ZoomIn(){
+        // ＋ボタン押下時のzoom値を取得しておく
+        PreZoom = zoom;
+        zoom++;
+        StartCoroutine(updateMap());
+    }
+
+    public void ZoomOut(){
+        // -ボタン押下時のzoom値を取得しておく
+        PreZoom = zoom;
+        zoom--;
+        StartCoroutine(updateMap());
     }
 
     // マップ更新
@@ -78,6 +101,15 @@ public class StaticMapController : MonoBehaviour
                 prev = curr;
             }
 
+            // zoom率変更ボタンが押下された時にマップを再描画
+            if(PreZoom != zoom)
+            {
+                // マップを再描画
+                yield return StartCoroutine(downloading(curr));
+                // prevを更新して前回の経度、緯度を保持しておく
+                prev = curr;
+            }
+
             // 待機
             yield return new WaitForSeconds(UpdateMapTime);
         }
@@ -86,17 +118,27 @@ public class StaticMapController : MonoBehaviour
         IEnumerator downloading(LocationInfo current)
         {
             loading.SetActive(true);
-
             // ベースURL
             string url = BaseUrl;
+            Debug.Log(url);
             // 中心座標
-            url += "center" + curr.latitude + "," + curr.longitude;
+            url += "center=" + curr.latitude + "," + curr.longitude;
+            Debug.Log(url);
             // ズーム
             url += "&zoom=" + zoom;
+            Debug.Log(url);            
             // 画像サイズ（640x640が上限）
-            url += "&size" + MapImageSize + "x" + MapImageSize;
+            url += "&size=" + MapImageSize + "x" + MapImageSize;
+            Debug.Log(url);            
+            // 現在地アイコン
+            url += "&markers=" + LocationIcon + "|shadow:false|" + curr.latitude + "," + curr.longitude;
+            Debug.Log(url);            
+            // 目的地アイコン
+            url += "&markers=ize:mid|color:red|" + GsAcademy;
+            Debug.Log(url);            
             // API Key
-            url += "&key" + GoogleApiKey;
+            url += "&key=" + GoogleApiKey;
+            Debug.Log(url);
 
             // 地図画像をダウンロード
             // UnityWebRequest.UnEscapeURL(url) = エスケープシーケンス（特殊文字）を変換し、ユーザーが使いやすいテキストを返す。
@@ -140,9 +182,6 @@ public class StaticMapController : MonoBehaviour
             return dist;
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+
+
