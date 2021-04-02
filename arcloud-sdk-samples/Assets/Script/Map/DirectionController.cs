@@ -9,13 +9,15 @@ using System.Collections.Generic;
 
 public class DirectionController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject MapAPIManager;
+
+    StaticMapController StaticMapController;
+
     private const string GOOGLE_DIRECTIONS_API_URL = "https://maps.googleapis.com/maps/api/directions/json?key=AIzaSyCN773NQ0NQsV4OjQjSd-TuFv-5Z9IEbWU&mode=walking";
 
     // 現在地
     private LocationInfo CurrentLocation;
-
-    StaticMapController script;
-
     // 目的地
     [SerializeField]
     private string Goal = "35.66945879591624,139.7065473999986";
@@ -30,7 +32,7 @@ public class DirectionController : MonoBehaviour
             Input.location.Start();
             CurrentLocation = Input.location.lastData;
             Debug.Log(CurrentLocation);
-            StartCoroutine(GetDirection()); 
+            StartCoroutine(GetDirection());
     }
 
     private IEnumerator GetDirection()
@@ -75,6 +77,7 @@ public class DirectionController : MonoBehaviour
             }
         }
         Debug.Log("DirectionController処理終了。呼び出し");
-        script.StartMapCoroutine();
+        StaticMapController = MapAPIManager.GetComponent<StaticMapController>();
+        StaticMapController.ReturnDirecAPI();
     }
 }
