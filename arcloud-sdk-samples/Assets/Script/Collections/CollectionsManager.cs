@@ -23,7 +23,8 @@ public class CollectionsManager : MonoBehaviour
     [SerializeField]
     private EventSystem eventSystem;
     private GameObject SelectedObj;
-    public static int SelectedListID;  
+    public static int SelectedListID;
+
 
     void Start()
     {

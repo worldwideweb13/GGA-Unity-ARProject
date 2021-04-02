@@ -3,6 +3,7 @@
 using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class StaticMapController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class StaticMapController : MonoBehaviour
     private string LocationIcon = "icon:https://user-images.githubusercontent.com/75665390/113117053-10f9b400-9249-11eb-90a7-8e0ac234a728.png";
 
     // ジーズアカデミー
-    private string GsAcademy = "35.66945879591624,139.7065473999986";
+    private string GoalLocationInfo = "";
 
     // 画像のzoomサイズ
     public int zoom = 17;
@@ -81,22 +82,36 @@ public class StaticMapController : MonoBehaviour
         StartCoroutine(updateMap());
     }
 
+    public void ReturnDirecAPI()
+    {
+        Debug.Log("コルーチン実行");
+        StartCoroutine(updateMap());
+    }
+
+    // ルート探索ボタン押下時に呼び出されるメソッド（非同期処理バージョン）
+    // public void RouteSearch()
+    // {
+    //     var task = GetDirecAPI();
+    //     task.Wait();
+    //     Debug.Log("task.Wait()の後");       
+    //     StartCoroutine(updateMap());
+    // }
+
+    // private Task GetDirecAPI()
+    // {
+    //     GoalFlag = true;
+    //     Script = DirectionMapAPIManager.GetComponent<DirectionController>();
+    //     Script.GoalSearch();
+    //     return GetDirecAPI();
+    // }
+
     // ルート探索ボタン押下時に呼び出されるメソッド
     public void RouteSearch()
     {
+        GoalLocationInfo = NamePanelTable.Location;
         GoalFlag = true;
-        // DirectionController.csを読み込み使えるようにしておく
-        Script = DirectionMapAPIManager.GetComponent<DirectionController>();        
-        // GoogleDirectionAPIのメソッドを呼び出し
+        Script = DirectionMapAPIManager.GetComponent<DirectionController>();
         Script.GoalSearch();
-        // StartCoroutine(updateMap());
-    }
-
-    // DirevtionControllerから呼び出される関数
-    public void StartMapCoroutine()
-    {
-        Debug.Log("GetDirection()実行後に呼び出されるべき関数");
-        StartCoroutine(updateMap()); 
     }
 
 
@@ -180,16 +195,15 @@ public class StaticMapController : MonoBehaviour
             url += "&markers=" + LocationIcon + "|shadow:false|" + curr.latitude + "," + curr.longitude;
             // Debug.Log(url);            
             // 目的地アイコン
-            url += "&markers=ize:mid|color:red|" + GsAcademy;
+            url += "&markers=ize:mid|color:red|" + GoalLocationInfo;
             Debug.Log(url); 
 
             // 経路に値が入っている場合は取得した状態でマップを描画
             if(DirectionController.GoalRoute != "")
             {
-                Debug.Log("★★★★★★★★★の後に実行されるべき処処理");
+                Debug.Log("コルーチン実行★★★★★★★★★の後に実行されるべき処処理");
                 url += "&path=color:red|" + curr.latitude + "," + curr.longitude + DirectionController.GoalRoute;
                 Debug.Log("ルート探索のURL: "+url);
-
             }
 
             // API Key

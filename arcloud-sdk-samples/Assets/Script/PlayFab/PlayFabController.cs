@@ -156,7 +156,8 @@ public class PlayFabController : MonoBehaviour {
                         { "KeyWord", chara.KeyWord},
                         { "ImgTitle", chara.ImgTitle},
                         { "AvatorName", chara.AvatorName},
-                        { "PanelText", chara.PanelText}
+                        { "PanelText", chara.PanelText},
+                        { "Location", chara.Location}
                       };
                       CharaDataList.Add(CharaData);
                     }
@@ -179,6 +180,7 @@ public class PlayFabController : MonoBehaviour {
         public string ImgTitle { get; set; }
         public string AvatorName { get; set; }
         public string PanelText { get; set; }
+        public string Location { get; set; }
     }
 
 }
