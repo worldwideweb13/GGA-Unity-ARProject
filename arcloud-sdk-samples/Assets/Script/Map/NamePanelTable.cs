@@ -6,5 +6,5 @@ public class NamePanelTable : MonoBehaviour
 {
     // 図鑑一覧画面でタップされたキャラクターのリスト番号を保持するためのステータス
     public int CharaDataListNo;
-    public static string Location;
+    public string Location;
 }

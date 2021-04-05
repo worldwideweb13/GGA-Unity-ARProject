@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using UnityEngine.EventSystems;
 
 public class StaticMapController : MonoBehaviour
 {
@@ -14,9 +15,6 @@ public class StaticMapController : MonoBehaviour
 
     // 現在地表示のピン
     private string LocationIcon = "icon:https://user-images.githubusercontent.com/75665390/113117053-10f9b400-9249-11eb-90a7-8e0ac234a728.png";
-
-    // ジーズアカデミー
-    private string GoalLocationInfo = "";
 
     // 画像のzoomサイズ
     public int zoom = 17;
@@ -45,6 +43,19 @@ public class StaticMapController : MonoBehaviour
     // ルート探索監視用フラグ
     public static bool GoalFlag = false;
 
+    // 全ての目的の経度緯度情報を保持しておくための変数
+    public static string AllGoalLocations;
+    private int count;
+
+    // マップ一覧からタップされたキャラデータを取得するための設定一覧
+    [SerializeField]
+    private EventSystem eventSystem;
+    private GameObject SelectedObj;
+
+    private GameObject SelectedParentObj;
+
+    // 経路ボタンが押下された墓地の経度、緯度情報を保持しておくステータス
+    public static string GoalLocationInfo;
     [SerializeField] GameObject loading; //ダウンロード確認用オブジェクト
     // [SerializeField] Text txtLocation; //座標
     // [SerializeField] Text txtDistance; //距離
@@ -84,31 +95,19 @@ public class StaticMapController : MonoBehaviour
 
     public void ReturnDirecAPI()
     {
-        Debug.Log("コルーチン実行");
+        // Debug.Log("コルーチン実行");
         StartCoroutine(updateMap());
     }
 
-    // ルート探索ボタン押下時に呼び出されるメソッド（非同期処理バージョン）
-    // public void RouteSearch()
-    // {
-    //     var task = GetDirecAPI();
-    //     task.Wait();
-    //     Debug.Log("task.Wait()の後");       
-    //     StartCoroutine(updateMap());
-    // }
-
-    // private Task GetDirecAPI()
-    // {
-    //     GoalFlag = true;
-    //     Script = DirectionMapAPIManager.GetComponent<DirectionController>();
-    //     Script.GoalSearch();
-    //     return GetDirecAPI();
-    // }
 
     // ルート探索ボタン押下時に呼び出されるメソッド
     public void RouteSearch()
     {
-        GoalLocationInfo = NamePanelTable.Location;
+        SelectedObj = eventSystem.currentSelectedGameObject.gameObject;
+        SelectedParentObj = SelectedObj.transform.parent.gameObject;
+        GoalLocationInfo = SelectedParentObj.GetComponent<NamePanelTable>().Location;
+        // GoalLocationInfo = NamePanelTable.Location;
+        Debug.Log("GoalLocationInfo: " + GoalLocationInfo);
         GoalFlag = true;
         Script = DirectionMapAPIManager.GetComponent<DirectionController>();
         Script.GoalSearch();
@@ -147,7 +146,7 @@ public class StaticMapController : MonoBehaviour
         // ルート検索ボタンが押下された時にマップを再描画
         if(GoalFlag == true)
         {
-            Debug.Log("GoalFlagがtrueなのでルート探索描画開始：★★★★★★★★★");
+            // Debug.Log("GoalFlagがtrueなのでルート探索描画開始：★★★★★★★★★");
             // LocationServiceStatus.Runningの時、Input.location.lastDataに取得した位置情報が適宜格納される
             curr = Input.location.lastData;            
             // マップを再描画
@@ -181,34 +180,34 @@ public class StaticMapController : MonoBehaviour
             loading.SetActive(true);
             // ベースURL
             string url = BaseUrl;
-            // Debug.Log(url);
             // 中心座標
             url += "center=" + curr.latitude + "," + curr.longitude;
-            // Debug.Log(url);
             // ズーム
             url += "&zoom=" + zoom;
-            // Debug.Log(url);            
             // 画像サイズ（640x640が上限）
             url += "&size=" + MapImageSize + "x" + MapImageSize;
-            // Debug.Log(url);            
             // 現在地アイコン
             url += "&markers=" + LocationIcon + "|shadow:false|" + curr.latitude + "," + curr.longitude;
-            // Debug.Log(url);            
-            // 目的地アイコン
-            url += "&markers=ize:mid|color:red|" + GoalLocationInfo;
-            Debug.Log(url); 
+            if(GoalLocationInfo != null)
+            {
+                // 目的地アイコン
+                url += "&markers=ize:mid|color:red|" + GoalLocationInfo;
+            }
+            // 全ての目的地の経度緯度を取得して値を保持
+            url += AllGoalLocations;
+            Debug.Log("目的地アイコン" + url);
 
             // 経路に値が入っている場合は取得した状態でマップを描画
             if(DirectionController.GoalRoute != "")
             {
-                Debug.Log("コルーチン実行★★★★★★★★★の後に実行されるべき処処理");
+                // Debug.Log("コルーチン実行★★★★★★★★★の後に実行されるべき処処理");
                 url += "&path=color:red|" + curr.latitude + "," + curr.longitude + DirectionController.GoalRoute;
-                Debug.Log("ルート探索のURL: "+url);
+                // Debug.Log("ルート探索のURL: "+url);
             }
 
             // API Key
             url += "&key=" + GoogleApiKey;
-            Debug.Log("最終的なStaticAPIのURL: " + url);
+            // Debug.Log("最終的なStaticAPIのURL: " + url);
 
             // 地図画像をダウンロード
             // UnityWebRequest.UnEscapeURL(url) = エスケープシーケンス（特殊文字）を変換し、ユーザーが使いやすいテキストを返す。

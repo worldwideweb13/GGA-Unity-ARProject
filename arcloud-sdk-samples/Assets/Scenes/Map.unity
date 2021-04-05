@@ -1626,6 +1626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharaDataListNo: 0
+  Location: 
 --- !u!222 &893422129
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3108,6 +3109,7 @@ MonoBehaviour:
   zoom: 17
   DirectionMapAPIManager: {fileID: 2086049701}
   directionUrl: {fileID: 0}
+  eventSystem: {fileID: 904811113}
   loading: {fileID: 512302442}
   mapImage: {fileID: 798140591}
 --- !u!4 &1912112990
