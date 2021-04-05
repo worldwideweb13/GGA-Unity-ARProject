@@ -38,7 +38,10 @@ public class ScrollViewManager : MonoBehaviour
             // "CharaDataList"のリスト番号をインスタンスにスクリプト経由で保持させておく
             Panel.GetComponent<NamePanelTable>().CharaDataListNo = i;
             // 経度緯度情報をインスタンスの値を保持するNamePanelTableに保持させておく
-            NamePanelTable.Location = PlayFabController.CharaDataList[i]["Location"];
+            Panel.GetComponent<NamePanelTable>().Location = PlayFabController.CharaDataList[i]["Location"];
+            Debug.Log(Panel.GetComponent<NamePanelTable>().Location);
+            // 目的地一覧
+            StaticMapController.AllGoalLocations += "&markers=ize:mid|color:red|" + PlayFabController.CharaDataList[i]["Location"];
             Panel.SetActive(true);
         }  
     }
