@@ -333,9 +333,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5985562192484823246}
-  - {fileID: 7379816213349656347}
   - {fileID: 5200201866622877522}
+  - {fileID: 7379816213349656347}
+  - {fileID: 5985562192484823246}
   m_Father: {fileID: 1959295008}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 33c3da143c2e54bd88dda3cda7a9e955, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c4ca83a94871c4c21a06c0ed7679b505, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1896,13 +1896,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9622642, g: 0.9577252, b: 0.9577252, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47b4b728ef38a47a1bf8c63882763ed3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 481c951d0ef5f0947a77aae92513a4d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2052,7 +2052,7 @@ RectTransform:
   - {fileID: 6545875733637860050}
   - {fileID: 5607829382058247162}
   m_Father: {fileID: 575375357}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2137,7 +2137,7 @@ RectTransform:
   - {fileID: 4750653696841631054}
   - {fileID: 6262582999991536742}
   m_Father: {fileID: 575375357}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2207,6 +2207,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1959295009}
+        m_MethodName: GetCurrentSceneName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Title
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!224 &6262582999991536742
@@ -2338,6 +2349,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1959295009}
+        m_MethodName: GetCurrentSceneName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Title
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &7175228887451458483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2400,6 +2422,16 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 10fe5639e0f60419bb80f7fd3d79fa90, type: 3}
+    - target: {fileID: 7401601908983843900, guid: 22e5e84f852c148adb30c58ed0fd0574,
+        type: 3}
+      propertyPath: audioCameraClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f092e46ee21942fab49621b6abd6fa5, type: 3}
+    - target: {fileID: 7401601908983843900, guid: 22e5e84f852c148adb30c58ed0fd0574,
+        type: 3}
+      propertyPath: audioCameraSourceSE
+      value: 
+      objectReference: {fileID: 7401601908941638047}
     - target: {fileID: 7401601908983843902, guid: 22e5e84f852c148adb30c58ed0fd0574,
         type: 3}
       propertyPath: m_RootOrder
@@ -2467,6 +2499,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22e5e84f852c148adb30c58ed0fd0574, type: 3}
+--- !u!82 &7401601908941638047 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7401601908983843903, guid: 22e5e84f852c148adb30c58ed0fd0574,
+    type: 3}
+  m_PrefabInstance: {fileID: 7401601908941638046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7484798284166897372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,6 +3145,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1959295009}
+        m_MethodName: GetCurrentSceneName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Title
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &8914230374003123570

@@ -38,9 +38,9 @@ public class CollectionDataManager : MonoBehaviour
         GameObject instance = (GameObject)Instantiate(Character);
     }
 
-    // Update is called once per frame
-    void Update()
+    // ボタン押下時にタップ音
+    public void OnToSceneButton()
     {
-        
+        SoundManager.instance.PlaySE();
     }
 }
