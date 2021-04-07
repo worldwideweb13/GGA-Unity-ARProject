@@ -53,7 +53,6 @@ public class StaticMapController : MonoBehaviour
     private GameObject SelectedObj;
 
     private GameObject SelectedParentObj;
-
     // 経路ボタンが押下された墓地の経度、緯度情報を保持しておくステータス
     public static string GoalLocationInfo;
     [SerializeField] GameObject loading; //ダウンロード確認用オブジェクト

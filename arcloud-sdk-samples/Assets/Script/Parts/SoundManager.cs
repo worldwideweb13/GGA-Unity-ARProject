@@ -26,6 +26,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource audioSourceSE; //SEのスピーカー
     public AudioClip audioClip; //ならす素材
 
+    public AudioSource audioCameraSourceSE; //カメラシャッター音のスピーカー
+    public AudioClip audioCameraClip; //シャッター音を鳴らす素材
+
+
     public void PlayBGM(string SceneName)
     {                
         audioSourceBGM.Stop();
@@ -77,5 +81,10 @@ public class SoundManager : MonoBehaviour
     public void PlaySE()
     {
         audioSourceSE.PlayOneShot(audioClip); //SEを一度だけならす
+    }
+
+    public void PlayCameraSE()
+    {
+        audioCameraSourceSE.PlayOneShot(audioCameraClip);
     }
 }

@@ -8,4 +8,9 @@ public class ARManager : MonoBehaviour
     {
         SoundManager.instance.PlaySE();
     }
+
+    public void SoundCameraButton()
+    {
+        SoundManager.instance.PlayCameraSE();
+    }
 }
