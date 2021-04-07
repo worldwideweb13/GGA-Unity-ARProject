@@ -107,7 +107,7 @@ public class StaticMapController : MonoBehaviour
         SelectedParentObj = SelectedObj.transform.parent.gameObject;
         GoalLocationInfo = SelectedParentObj.GetComponent<NamePanelTable>().Location;
         // GoalLocationInfo = NamePanelTable.Location;
-        Debug.Log("GoalLocationInfo: " + GoalLocationInfo);
+        Debug.Log("(1)GoalLocationInfo: " + GoalLocationInfo);
         GoalFlag = true;
         Script = DirectionMapAPIManager.GetComponent<DirectionController>();
         Script.GoalSearch();
@@ -188,26 +188,21 @@ public class StaticMapController : MonoBehaviour
             url += "&size=" + MapImageSize + "x" + MapImageSize;
             // 現在地アイコン
             url += "&markers=" + LocationIcon + "|shadow:false|" + curr.latitude + "," + curr.longitude;
-            if(GoalLocationInfo != null)
-            {
-                // 目的地アイコン
-                url += "&markers=ize:mid|color:red|" + GoalLocationInfo;
-            }
             // 全ての目的地の経度緯度を取得して値を保持
             url += AllGoalLocations;
-            Debug.Log("目的地アイコン" + url);
+            Debug.Log("(4)全ての目的地込みのURL" + url);
 
             // 経路に値が入っている場合は取得した状態でマップを描画
             if(DirectionController.GoalRoute != "")
             {
                 // Debug.Log("コルーチン実行★★★★★★★★★の後に実行されるべき処処理");
                 url += "&path=color:red|" + curr.latitude + "," + curr.longitude + DirectionController.GoalRoute;
-                // Debug.Log("ルート探索のURL: "+url);
+                Debug.Log("(5)全ての目的地とルート探索込みのURL: "+url);
             }
 
             // API Key
             url += "&key=" + GoogleApiKey;
-            // Debug.Log("最終的なStaticAPIのURL: " + url);
+            Debug.Log("(6)最終的なStaticAPIのURL: " + url);
 
             // 地図画像をダウンロード
             // UnityWebRequest.UnEscapeURL(url) = エスケープシーケンス（特殊文字）を変換し、ユーザーが使いやすいテキストを返す。

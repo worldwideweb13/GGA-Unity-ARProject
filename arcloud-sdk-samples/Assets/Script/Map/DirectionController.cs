@@ -20,7 +20,7 @@ public class DirectionController : MonoBehaviour
     private LocationInfo CurrentLocation;
     // 目的地
     [SerializeField]
-    private string Goal = StaticMapController.GoalLocationInfo;
+    private string Goal;
 
     // APIより取得した経路（StaticMapControllerに渡すためのパラメータ）
     public static string GoalRoute = "";
@@ -41,8 +41,9 @@ public class DirectionController : MonoBehaviour
         // origin=開始地点。現在地からの経路を出したいので現在地を渡す。
         var query = "&origin=" +  CurrentLocation.latitude + "," + CurrentLocation.longitude;
         // destination=目的地。InputFieldに入力した文字列をエスケープして渡す。
+        Goal = StaticMapController.GoalLocationInfo;
         query += "&destination=" + Goal;
-        // Debug.Log("GetDirectionのquery: " + GOOGLE_DIRECTIONS_API_URL + query);
+        // Debug.Log("(2)GetDirectionのquery: " + GOOGLE_DIRECTIONS_API_URL + query);
         // GoogleDirectionAPI実行。現在地と目的地と渡してJSON形式のデータを受け取る
         UnityWebRequest req = UnityWebRequest.Get(GOOGLE_DIRECTIONS_API_URL + query);
         yield return req.SendWebRequest();
@@ -70,9 +71,9 @@ public class DirectionController : MonoBehaviour
                 // Debug.Log("返ってきたjsonをByte[]形式を処理5");
                 // 経路は|緯度,経度|という書き方になるので、受け取ったlatitude, longitudeをパイプとカンマを付けて追加していく
                 GoalRoute += "|" + leg.steps[i].end_location.lat + "," + leg.steps[i].end_location.lng;
-                // Debug.Log("GoalRouteの最終的な文字列： " + GoalRoute);
+                // Debug.Log("(3)DirectionAPI実行後の受け取り文字列： " + GoalRoute);
                 // 経路が多すぎるとUriFormatExceptionで落ちるため上限を設定しておく。
-                if(i > 20)break;
+                if(i > 30)break;
                 // ***ここでエラーメッセージを画面に出す処理を記述***
             }
         }
