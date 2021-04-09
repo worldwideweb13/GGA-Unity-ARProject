@@ -3892,6 +3892,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FooterCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6393073014266661562, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 904811113}
     - target: {fileID: 6393073014266661563, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
         type: 3}
       propertyPath: m_Pivot.x

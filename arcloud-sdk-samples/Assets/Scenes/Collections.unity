@@ -2345,12 +2345,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6393073013182312258}
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -2360,11 +2376,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnToSceneButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GetCurrentSceneName
+      objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: GetCurrentSceneName
       objectReference: {fileID: 0}
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
@@ -2398,6 +2426,11 @@ PrefabInstance:
     - target: {fileID: 1856702402, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393073012913204033, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6393073012913204033, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
         type: 3}
@@ -2523,6 +2556,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393073014268969589, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6393073014268969589, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
         type: 3}
