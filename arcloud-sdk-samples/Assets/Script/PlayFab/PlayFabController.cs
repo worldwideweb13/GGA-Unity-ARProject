@@ -64,25 +64,105 @@ public class PlayFabController : MonoBehaviour {
       Login();//ログインしなおし
       return;
     }
+
     // ログイン成功時点で、キャラクターデータをplayFabから取得
     GetTitleData();
 
     //アカウント作成時にIDを保存
     if (result.NewlyCreated) {
       SaveCustomID();
+      // キャラ図鑑の初期値を設定
+      SetNewUserData();
       // 初回ログインの場合は、オープニング画面に飛ばす
-      var OpeningScene = MainCanvas.GetComponent<SceneTransitionManager>();
-      OpeningScene.LoadTo("ARSelect");      
+      // var OpeningScene = MainCanvas.GetComponent<SceneTransitionManager>();
+      // OpeningScene.LoadTo("ARSelect");
+      // 匿名アカウント発行後、トップメニューを表示
+      PressStartIcon.SetActive(false);
+      SetMenu();
+      Debug.Log($"(3)新規のアカウントでログインに成功\nPlayFabId : {result.PlayFabId}, CustomId : {_customID}\nアカウントを作成したか : {result.NewlyCreated}");
+    } else {
+      Debug.Log("ここから先の処理は新規アカウント作成時は動いてはいけない処理です");
+      // 初回ログインでない場合は、プレイヤーデータをplayFabから取得
+      GetUserData();
+      Debug.Log($"(3)既存のアカウントでログインに成功\nPlayFabId : {result.PlayFabId}, CustomId : {_customID}\nアカウントを作成したか : {result.NewlyCreated}");
+      // 2回目以降のログインの場合は、トップメニューを表示
+      PressStartIcon.SetActive(false);
+      SetMenu();
     }
-    Debug.Log($"PlayFabのログインに成功\nPlayFabId : {result.PlayFabId}, CustomId : {_customID}\nアカウントを作成したか : {result.NewlyCreated}");
-    // 2回目以降のログインの場合は、トップメニューを表示
-    PressStartIcon.SetActive(false);
-    SetMenu();
   }
 
   //ログイン失敗
   private void OnLoginFailure(PlayFabError error){
     Debug.LogError($"PlayFabのログインに失敗\n{error.GenerateErrorReport()}");
+  }
+
+  //=================================================================================
+  //プレイヤーデータの新規登録処理
+  //=================================================================================
+  private void SetNewUserData()
+  {
+    Debug.Log("SetNewUserData()の中です");
+    var SavedCharaInfos = new List<SavedCharaInfo>
+    {
+      new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
+    };
+    Debug.Log("SavedCharaInfosにリストを収納した後です");
+    Debug.Log(SavedCharaInfos.Count);
+    PlayFabClientAPI.UpdateUserData(
+      new UpdateUserDataRequest
+      {
+        Data = new Dictionary<string,string>()
+        {
+          {"SavedCharaInfo", PlayFabSimpleJson.SerializeObject(SavedCharaInfos)}
+        }
+      },
+      result => { Debug.Log("(1)新規プレイヤーデータの登録成功!!");},
+      error => { Debug.Log(error.GenerateErrorReport()); });
+
+      // 初回ログイン時は、ユーザーデータにアクセスできないので、
+      // ローカルにキャラクターデータの初期値を保持させておく
+      for(int i=0; i < SavedCharaInfos.Count; i++)
+      {
+        // CharaDataListにユーザーデータから取得したStatusの値を追加
+        CharaDataList[i]["Status"] = "false";
+      }
+      // データが適切に入っているか確認
+      Debug.Log("新規登録時:" + CharaDataList[0]["Status"]);
+      Debug.Log("新規登録時:" + CharaDataList[3]["Status"]);
+  }
+
+  public class SavedCharaInfo
+  {
+    public string Status { get; set;}
+  }
+
+  void GetUserData()
+  {
+    Debug.Log("GetUserData()が呼び出されました");
+    PlayFabClientAPI.GetUserData(new GetUserDataRequest(),
+    result =>
+    {
+      var SavedCharaInfos = PlayFabSimpleJson.DeserializeObject<List<SavedCharaInfo>>(result.Data["SavedCharaInfo"].Value);
+      for(int i=0; i < SavedCharaInfos.Count; i++)
+      {
+        // CharaDataListにユーザーデータから取得したStatusの値を追加
+        CharaDataList[i].Add("Status", SavedCharaInfos[i].Status);
+        // PlayFabController.CharaDataList[i]["Name"];
+      }
+      Debug.Log("2回目以降のログイン:" + CharaDataList[0]["Status"]);
+      Debug.Log("2回目以降のログイン:" + CharaDataList[3]["Status"]);
+    },
+    error =>
+    {
+      Debug.Log("(2)プレイヤーデータの取得に失敗!!");
+      Debug.Log(error.GenerateErrorReport());
+    });
   }
   
   //=================================================================================
@@ -162,6 +242,7 @@ public class PlayFabController : MonoBehaviour {
                       CharaDataList.Add(CharaData);
                     }
                 }
+              
             },
             error =>
             {
