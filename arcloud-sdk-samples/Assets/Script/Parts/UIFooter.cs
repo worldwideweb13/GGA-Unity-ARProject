@@ -27,7 +27,6 @@ public class UIFooter : MonoBehaviour
     // ボタンを押した時、ボタン画像の色を青にする
     public void PointerDown()
     {
-        Debug.Log("ボタンが押されたよ");
         SelectedButton = eventSystem.currentSelectedGameObject.gameObject;
         SelectedButton.GetComponent<Image>().color = Color.blue;
         SelectedText = SelectedButton.transform.Find("Text").gameObject;
@@ -44,7 +43,6 @@ public class UIFooter : MonoBehaviour
     // スマホ操作時:ボタンから指を離した時、ボタン画像の色を黒に戻す
     public void PointerUp()
     {
-        Debug.Log("ボタンが押されたよ");
         SelectedButton.GetComponent<Image>().color = Color.black;
         SelectedText.GetComponent<Text>().color = Color.black;
     }
