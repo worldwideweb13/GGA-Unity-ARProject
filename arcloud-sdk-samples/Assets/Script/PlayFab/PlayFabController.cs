@@ -27,6 +27,9 @@ public class PlayFabController : MonoBehaviour {
   //=================================================================================
   //スタートボタンを押下した時の処理
   //=================================================================================
+ 
+  // スタートボタンが押された回数でPressStartの表示／非表示を管理
+   private static int PressCount = 1;
 
   [SerializeField]
   GameObject PressStartIcon;
@@ -34,30 +37,47 @@ public class PlayFabController : MonoBehaviour {
   [SerializeField]
   GameObject TopMenu;
 
+  //=================================================================================
+  //スタートボタンの表示／非表示 = PlayFabログイン処理の有無を制御
+  //=================================================================================
   
+  public void Start() {
+    Debug.Log("Start()実行");
+    // PressStartボタンの表示管理フラグ
+    if(PressCount == 1){
+        Debug.Log("初回起動時");
+        Debug.Log(PressCount);
+        PressStartIcon.SetActive(true);
+        PressCount ++;
+    } else {
+        Debug.Log("2回目以降の起動");
+        PressStartIcon.SetActive(false);
+        SetMenu(); 
+    }
+  }
+
+  //=================================================================================
+  //ログイン処理
+  //=================================================================================
+
+
   public void SetMenu() {
 
       TopMenu.SetActive(true);
       // image.enabled = false;
   }
 
-  //=================================================================================
-  //ログイン処理
-  //=================================================================================
-  
-  // public void Start() {
-  //   Login();
-  // }
 
   //ログイン実行
   public void Login() {
-    _customID = LoadCustomID();
-    var request = new LoginWithCustomIDRequest { CustomId = _customID,  CreateAccount = _shouldCreateAccount};
-    PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+      _customID = LoadCustomID();
+      var request = new LoginWithCustomIDRequest { CustomId = _customID,  CreateAccount = _shouldCreateAccount};
+      PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
   }
 
   //ログイン成功
   private void OnLoginSuccess(LoginResult result){
+    // 初回ログインのみ"PressStartが表示される"
     //アカウントを作成しようとしたのに、IDが既に使われていて、出来なかった場合
     if (_shouldCreateAccount && !result.NewlyCreated) {
       Debug.LogWarning($"CustomId : {_customID} は既に使われています。");
@@ -81,11 +101,8 @@ public class PlayFabController : MonoBehaviour {
       SetMenu();
       Debug.Log($"(3)新規のアカウントでログインに成功\nPlayFabId : {result.PlayFabId}, CustomId : {_customID}\nアカウントを作成したか : {result.NewlyCreated}");
     } else {
-      Debug.Log("ここから先の処理は新規アカウント作成時は動いてはいけない処理です");
-      // 初回ログインでない場合は、プレイヤーデータをplayFabから取得
-      GetUserData();
       Debug.Log($"(3)既存のアカウントでログインに成功\nPlayFabId : {result.PlayFabId}, CustomId : {_customID}\nアカウントを作成したか : {result.NewlyCreated}");
-      // 2回目以降のログインの場合は、トップメニューを表示
+      // 2回目以降のログインの場合、プレイヤーデータの取得処理はGetTitleData();のresultに記述
       PressStartIcon.SetActive(false);
       SetMenu();
     }
@@ -101,7 +118,6 @@ public class PlayFabController : MonoBehaviour {
   //=================================================================================
   private void SetNewUserData()
   {
-    Debug.Log("SetNewUserData()の中です");
     var SavedCharaInfos = new List<SavedCharaInfo>
     {
       new SavedCharaInfo {Status = "false"},
@@ -112,8 +128,7 @@ public class PlayFabController : MonoBehaviour {
       new SavedCharaInfo {Status = "false"},
       new SavedCharaInfo {Status = "false"},
     };
-    Debug.Log("SavedCharaInfosにリストを収納した後です");
-    Debug.Log(SavedCharaInfos.Count);
+    // Debug.Log(SavedCharaInfos.Count);
     PlayFabClientAPI.UpdateUserData(
       new UpdateUserDataRequest
       {
@@ -122,19 +137,11 @@ public class PlayFabController : MonoBehaviour {
           {"SavedCharaInfo", PlayFabSimpleJson.SerializeObject(SavedCharaInfos)}
         }
       },
-      result => { Debug.Log("(1)新規プレイヤーデータの登録成功!!");},
+      result => { Debug.Log("(1)新規プレイヤーデータの登録成功!GetUserData()稼働");
+        // 新規プレイヤー作成後、ゲームデータをPlayFabから取得
+        GetUserData();      
+      },
       error => { Debug.Log(error.GenerateErrorReport()); });
-
-      // 初回ログイン時は、ユーザーデータにアクセスできないので、
-      // ローカルにキャラクターデータの初期値を保持させておく
-      for(int i=0; i < SavedCharaInfos.Count; i++)
-      {
-        // CharaDataListにユーザーデータから取得したStatusの値を追加
-        CharaDataList[i]["Status"] = "false";
-      }
-      // データが適切に入っているか確認
-      Debug.Log("新規登録時:" + CharaDataList[0]["Status"]);
-      Debug.Log("新規登録時:" + CharaDataList[3]["Status"]);
   }
 
   public class SavedCharaInfo
@@ -142,9 +149,10 @@ public class PlayFabController : MonoBehaviour {
     public string Status { get; set;}
   }
 
+  // ユーザーデータを取得して、CharaDataListにユーザーデータをマージします。
   void GetUserData()
   {
-    Debug.Log("GetUserData()が呼び出されました");
+    Debug.Log("(2)GetUserData()が呼び出されました");
     PlayFabClientAPI.GetUserData(new GetUserDataRequest(),
     result =>
     {
@@ -155,8 +163,8 @@ public class PlayFabController : MonoBehaviour {
         CharaDataList[i].Add("Status", SavedCharaInfos[i].Status);
         // PlayFabController.CharaDataList[i]["Name"];
       }
-      Debug.Log("2回目以降のログイン:" + CharaDataList[0]["Status"]);
-      Debug.Log("2回目以降のログイン:" + CharaDataList[3]["Status"]);
+      // Debug.Log("(3)2回目以降のログインの取得結果:" + CharaDataList[0]["Status"]);
+      // Debug.Log("(3)2回目以降のログインの取得結果:" + CharaDataList[3]["Status"]);
     },
     error =>
     {
@@ -242,7 +250,10 @@ public class PlayFabController : MonoBehaviour {
                       CharaDataList.Add(CharaData);
                     }
                 }
-              
+                  // 初回ログインでない場合は、CharaDataListの値がセットできてから、プレイヤーデータをplayFabから取得
+                if(_shouldCreateAccount == false) {
+                  GetUserData();
+                }
             },
             error =>
             {

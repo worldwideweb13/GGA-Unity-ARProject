@@ -311,6 +311,7 @@ MonoBehaviour:
   DialogUICcanvas: {fileID: 1012698101}
   DialogPanel: {fileID: 1012253056}
   DialogText: {fileID: 602183365}
+  CharaDataNumber: 6
   message:
   - "\u8FF7\u3048\u308B\u5B50\u7F8A\u9054\u3088\u3002\u3088\u304F\u305E\u3053\u3053\u306B\u305F\u3069\u308A\u7740\u3044\u305F\u3002"
   - "\u30DE\u30ED\u306E\u540D\u524D\u306F\u30B8\u30FC\u30BA\u541B\u3002\u3053\u3053\u306F\u30A8\u30F3\u30B8\u30CB\u30A2\u306E\u5375\u3092\u80B2\u3066\u308B\u5B66\u6821\u3067\u3042\u308B\u305E\u3002"
@@ -385,7 +386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1439879563}
+  - {fileID: 1691854681}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -413,7 +414,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595095002}
-  m_Mesh: {fileID: 1913593154}
+  m_Mesh: {fileID: 1842821311}
 --- !u!114 &595095006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,28 +1346,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!21 &1439879563
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Immersal/pointcloud3d
-  m_Shader: {fileID: 4800000, guid: f721a43e0a98243fda41f17426a172cd, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats:
-    - _PointSize: 0.003
-    m_Colors: []
 --- !u!1001 &1478242954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1541,6 +1520,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e677586f15ef34125bec6b73b3ca59f3, type: 3}
+--- !u!21 &1691854681
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Immersal/pointcloud3d
+  m_Shader: {fileID: 4800000, guid: f721a43e0a98243fda41f17426a172cd, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - _PointSize: 0.003
+    m_Colors: []
 --- !u!1 &1752185961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1585,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1913593154
+--- !u!43 &1842821311
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -111,7 +111,7 @@ namespace Immersal.Samples.Util
 		// コルーチンの処理：2秒まってキャラクターを表示する
 		IEnumerator CharacterActive()
 		{
-			yield return new WaitForSeconds(2);
+			yield return new WaitForSeconds(1);
 			m_Chara.gameObject.SetActive(true);
 		}
 	}

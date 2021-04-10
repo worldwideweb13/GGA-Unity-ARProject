@@ -3877,6 +3877,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1538106170}
     m_Modifications:
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1455609875}
+    - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnToSceneButton
+      objectReference: {fileID: 0}
     - target: {fileID: 6393073012913204033, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target

@@ -14,6 +14,9 @@ public class DialogController : MonoBehaviour
     // メッセージテキスト
     public Text DialogText;
 
+    [SerializeField]
+    private int CharaDataNumber;
+
     // キャラクター毎のメッセージテキスト
     [SerializeField]
     private string[] message = new string[]{};
@@ -78,6 +81,10 @@ public class DialogController : MonoBehaviour
                     Clean();
                     key = 0;
                     DialogPanel.SetActive(false);
+                    // コメントを全て表示したらキャラクター図鑑開放フラグをtrueに書き換え
+                    PlayFabController.CharaDataList[CharaDataNumber]["Status"] = "true";
+                    Debug.Log("コメント終了後にステータスを更新: " + PlayFabController.CharaDataList[CharaDataNumber]["Status"]);
+                    // プレイヤーデータの更新処理
                     break;
                 default:
                     Clean();
@@ -89,20 +96,9 @@ public class DialogController : MonoBehaviour
 
     }
 
-    // string[] message = new string[]
-    // {
-    //     "マロの名は徳川慶喜。\n徳川幕府15代将軍にて徳川家最後の将軍なのじゃ！",
-    //     "先代の家康公は日本を治めるために幕府を開いたが、マロは幕府の時代を終わらせるために将軍職に就いたのじゃ",
-    //     "1867年京都の二条城にてマロは大政奉還を施工した。",
-    //     "これにより256年間続いた江戸幕府は終わりを迎えたのじゃ",
-    //     "「この世をば しばしの夢と 聞きたれど おもへば長き 月日なりけり」マロの辞世の句じゃ！"
-    // };
-
     //*******************************************************************
     //                メッセージパネルがタッチされた時の処理
     //*******************************************************************
-
-
 
 
     //*******************************************************************
