@@ -11,6 +11,9 @@ public class CollectionsManager : MonoBehaviour
     GameObject Content;
 
     [SerializeField]
+    GameObject QuestionPanel;
+
+    [SerializeField]
     GameObject CollectionDataPanel;
     private GameObject Name;
     private GameObject TextNo;
@@ -30,20 +33,30 @@ public class CollectionsManager : MonoBehaviour
     {
         for (int i=0; i< PlayFabController.CharaDataList.Count; i++)
         {
-            // 画面読み込み時に選択一覧を表示する
-            GameObject panel = Instantiate(CollectionDataPanel);
-            panel.transform.SetParent(Content.transform);
-            Name = panel.transform.Find("Name").gameObject;
-            EnName = panel.transform.Find("EnName").gameObject;
-            TextNo = panel.transform.Find("No/TextNo").gameObject;
-            CharacterImg = panel.transform.Find("CharacterImg").gameObject;
-            Name.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["Name"];
-            EnName.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["EnName"];
-            TextNo.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["ID"];
-            // "CharaDataList"のリスト番号をインスタンスにスクリプト経由で保持させておく
-            panel.GetComponent<CollectionDataPanelTable>().CharaDataListNo = i;
-            CharacterImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Character/" + PlayFabController.CharaDataList[i]["AvatorName"]);
-            panel.SetActive(true);
+            if(PlayFabController.CharaDataList[i]["Status"] == "true")
+            {
+                // 画面読み込み時に選択一覧を表示する
+                GameObject panel = Instantiate(CollectionDataPanel);
+                panel.transform.SetParent(Content.transform);
+                Name = panel.transform.Find("Name").gameObject;
+                EnName = panel.transform.Find("EnName").gameObject;
+                TextNo = panel.transform.Find("No/TextNo").gameObject;
+                CharacterImg = panel.transform.Find("CharacterImg").gameObject;
+                Name.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["Name"];
+                EnName.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["EnName"];
+                TextNo.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["ID"];
+                // "CharaDataList"のリスト番号をインスタンスにスクリプト経由で保持させておく
+                panel.GetComponent<CollectionDataPanelTable>().CharaDataListNo = i;
+                Debug.Log("CharaDataListのリスト番号が保存されているかを確認" +  panel.GetComponent<CollectionDataPanelTable>().CharaDataListNo);
+                CharacterImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Character/" + PlayFabController.CharaDataList[i]["AvatorName"]);
+                panel.SetActive(true);
+            } else if(PlayFabController.CharaDataList[i]["Status"] == "false") 
+            {
+                // ユーザーが登録していないキャラの場合はQuestionパネルを表示
+                GameObject questionPanel = Instantiate(QuestionPanel);
+                questionPanel.transform.SetParent(Content.transform);
+                questionPanel.SetActive(true);
+            }
         }
     }
     public void OnToSceneButton()
