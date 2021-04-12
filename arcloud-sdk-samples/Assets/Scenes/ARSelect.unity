@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -10287,6 +10287,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1538106170}
     m_Modifications:
+    - target: {fileID: 666398194, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 666398196, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -10300,6 +10304,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1455609875}
+    - target: {fileID: 6393073012913204414, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -300
+      objectReference: {fileID: 0}
     - target: {fileID: 6393073014266661560, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
         type: 3}
       propertyPath: m_Name
@@ -10415,11 +10424,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6393073014268969586, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 6393073014268969589, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1455609875}
+    - target: {fileID: 8416886245428842636, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416886245428842636, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1455609875}
+    - target: {fileID: 8416886245428842636, guid: 3bbcd77898bf443f08dc0e1da3cc9145,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnToSceneButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bbcd77898bf443f08dc0e1da3cc9145, type: 3}
 --- !u!1 &7538409820377057242

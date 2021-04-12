@@ -35,19 +35,20 @@ public class CollectionsManager : MonoBehaviour
         {
             if(PlayFabController.CharaDataList[i]["Status"] == "true")
             {
+                Debug.Log("Status: " + PlayFabController.CharaDataList[i]["Status"]);
                 // 画面読み込み時に選択一覧を表示する
                 GameObject panel = Instantiate(CollectionDataPanel);
                 panel.transform.SetParent(Content.transform);
                 Name = panel.transform.Find("Name").gameObject;
                 EnName = panel.transform.Find("EnName").gameObject;
                 TextNo = panel.transform.Find("No/TextNo").gameObject;
-                CharacterImg = panel.transform.Find("CharacterImg").gameObject;
+                CharacterImg = panel.transform.Find("CharacterImg").gameObject;                
                 Name.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["Name"];
                 EnName.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["EnName"];
                 TextNo.GetComponent<Text>().text = PlayFabController.CharaDataList[i]["ID"];
+                Debug.Log("TextNo: " + TextNo.GetComponent<Text>().text);
                 // "CharaDataList"のリスト番号をインスタンスにスクリプト経由で保持させておく
                 panel.GetComponent<CollectionDataPanelTable>().CharaDataListNo = i;
-                Debug.Log("CharaDataListのリスト番号が保存されているかを確認" +  panel.GetComponent<CollectionDataPanelTable>().CharaDataListNo);
                 CharacterImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Character/" + PlayFabController.CharaDataList[i]["AvatorName"]);
                 panel.SetActive(true);
             } else if(PlayFabController.CharaDataList[i]["Status"] == "false") 
@@ -71,6 +72,6 @@ public class CollectionsManager : MonoBehaviour
         SelectedListID = SelectedObj.GetComponent<CollectionDataPanelTable>().CharaDataListNo;
         // Debug.Log(SelectedText);
         // SceneTransitionManager obj = new SceneTransitionManager();
-        // obj.LoadTo("CollectionData");                
+        // obj.LoadTo("CollectionData");               
     }
 }

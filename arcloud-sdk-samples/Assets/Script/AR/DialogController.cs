@@ -16,7 +16,7 @@ public class DialogController : MonoBehaviour
 
     [SerializeField]
     private int CharaDataNumber;
-
+ 
     // キャラクター毎のメッセージテキスト
     [SerializeField]
     private string[] message = new string[]{};
@@ -59,6 +59,9 @@ public class DialogController : MonoBehaviour
         DialogText.text = "";
     }
 
+    // 図鑑を開放した時のメッセージ
+
+
     //*******************************************************************
     //                表示するメッセージ
     //*******************************************************************
@@ -78,13 +81,26 @@ public class DialogController : MonoBehaviour
             switch (key)
             {        
                 case 4:
+                    if(PlayFabController.CharaDataList[CharaDataNumber]["Status"] == "false"){
+                        Debug.Log("case4:trueの処理");
+                        Clean();
+                        PlayFabController.CharaDataList[CharaDataNumber]["Status"] = "true";
+                        Write( "ジーズ君が仲間になった！" + PlayFabController.CharaDataList[CharaDataNumber]["Name"] + "の図鑑が開放されます！図鑑から確認してみよう！");
+                        key++;
+                    } else {
+                        Debug.Log("case4:elseの処理");
+                        Clean();
+                        key = 0;
+                        DialogPanel.SetActive(false);
+                        // コメントを全て表示したらキャラクター図鑑開放フラグをtrueに書き換え
+                        // プレイヤーデータの更新処理
+                    }
+                    break;
+                case 5:
+                    Debug.Log("case5の処理");
                     Clean();
                     key = 0;
                     DialogPanel.SetActive(false);
-                    // コメントを全て表示したらキャラクター図鑑開放フラグをtrueに書き換え
-                    PlayFabController.CharaDataList[CharaDataNumber]["Status"] = "true";
-                    Debug.Log("コメント終了後にステータスを更新: " + PlayFabController.CharaDataList[CharaDataNumber]["Status"]);
-                    // プレイヤーデータの更新処理
                     break;
                 default:
                     Clean();
