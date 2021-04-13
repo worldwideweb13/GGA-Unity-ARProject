@@ -86,5 +86,6 @@ public class SoundManager : MonoBehaviour
     public void PlayCameraSE()
     {
         audioCameraSourceSE.PlayOneShot(audioCameraClip);
+        audioCameraSourceSE.volume = 1;
     }
 }
