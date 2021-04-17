@@ -62,6 +62,10 @@ public class SoundManager : MonoBehaviour
             case "MakinoAR":
                 audioSourceBGM.clip = audioClipsBGM[6];
                 break;
+            case "GsAR":
+                audioSourceBGM.clip = audioClipsBGM[1];
+                audioSourceBGM.volume = 0.3f;
+                break;
             case "ARSelect":
                 audioSourceBGM.clip = audioClipsBGM[7];
                  audioSourceBGM.volume = 1;               
