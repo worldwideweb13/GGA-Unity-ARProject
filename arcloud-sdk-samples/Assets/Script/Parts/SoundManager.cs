@@ -66,6 +66,10 @@ public class SoundManager : MonoBehaviour
                 audioSourceBGM.clip = audioClipsBGM[1];
                 audioSourceBGM.volume = 0.3f;
                 break;
+            case "YamazakiAR":
+                audioSourceBGM.clip = audioClipsBGM[1];
+                audioSourceBGM.volume = 0.3f;
+                break;
             case "ARSelect":
                 audioSourceBGM.clip = audioClipsBGM[7];
                  audioSourceBGM.volume = 1;               
