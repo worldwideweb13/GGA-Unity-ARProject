@@ -54,11 +54,25 @@ public class CamNaviController : MonoBehaviour
         webCam = new WebCamTexture(WebCamTexture.devices[0].name, Pwidth, Pheight);
         Debug.Log("(1)カメラのテクスチャ取得→(2)RawImageのオイラー角を取得");
         Vector3 angles = RawImage.GetComponent<RectTransform>().eulerAngles;
-        Debug.Log("(1)(2)→(3)カメラテクスチャの右回りの角度を-x°の形式で取得してオイラー角のZ軸に代入");
+
+        // 接続しているデバイスのリストをシステムに問い合わせ
+        var devices = WebCamTexture.devices;
+        if(devices.Length > 0)
+        {
+            // Iphoneの場合はカメラの向きを縦向きにする
+            if(Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                // RawImageをZ軸に90°回転
+                RawImage.transform.localRotation = Quaternion.Euler(angles.x, angles.y, angles.z -90 );
+            }
+        }
+
         // カメラ起動
         webCam.Play();
-        Debug.Log("(1)(2)(3)→(4)webCam.Play()起動");
-        angles.z = -webCam.videoRotationAngle;
+        Debug.Log("(1)(2)→(3)webCam.Play()起動");       
+        // angles.z = -webCam.videoRotationAngle;
+        // Debug.Log("(1)(2)(3)→(4)カメラテクスチャの右回りの角度を-x°の形式で取得してオイラー角のZ軸に代入");
+
         Debug.Log("(1)(2)(3)(4)→(5)RawImageのRectTransformにオイラー角を代入");
         RawImage.GetComponent<RectTransform>().eulerAngles = angles;
         // widthはx、heightはyでサイズ調整
