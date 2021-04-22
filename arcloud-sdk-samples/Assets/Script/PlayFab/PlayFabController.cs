@@ -127,6 +127,7 @@ public class PlayFabController : MonoBehaviour {
       new SavedCharaInfo {Status = "false"},
       new SavedCharaInfo {Status = "false"},
       new SavedCharaInfo {Status = "false"},
+      new SavedCharaInfo {Status = "false"},
     };
     // Debug.Log(SavedCharaInfos.Count);
     PlayFabClientAPI.UpdateUserData(
