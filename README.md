@@ -3,9 +3,9 @@
 * 制作期間： 2021年1月~　７日間
 * 使用技術： Unity,C#
 * Unityバージョン: 2019.4.17f1
-* プロダクト紹介映像: https://youtu.be/Il8LqphmQdc
+* プロダクト紹介映像: https://youtu.be/iDfVqCxDq7I
 
-[![IMAGE ALT TEXT HERE](thumbnailImage.png)](https://youtu.be/Il8LqphmQdc)
+[![IMAGE ALT TEXT HERE](thumbnailImage.png)](https://youtu.be/iDfVqCxDq7I)
 
 ### 概要
 エヴァンゲリオンのシンの公開前だったため、シンゴジラをテーマにダンジョンゲームを作成してみました。
