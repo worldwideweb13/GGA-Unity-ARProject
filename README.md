@@ -1,4 +1,4 @@
-### ヤシオリ作戦
+### ぼちなび
 
 * 制作期間： 2021年2月~４月　約６０日間
 * 使用技術： Unity,C#,immersal,Playfab,GoogleMapAPI
