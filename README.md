@@ -28,3 +28,6 @@ VPS（Visual Positioning Service）と呼ばれるAR技術を活用すること�
 
 ##### 図1 Immersalにて3dデータを取り込み描画した映像
 ![3dImage](productImage-1.png)
+
+##### 図2 図１の3dデータを点群データ(VPS)として取得した映像
+![3dImage](productImage-2.png)
